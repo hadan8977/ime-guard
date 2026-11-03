@@ -1,0 +1,69 @@
+{
+  "name": "ime-guard",
+  "version": "0.1.0",
+  "description": "Stop Enter/Escape from firing while a CJK IME is composing. Zero deps, framework-agnostic, Safari-safe, with test helpers.",
+  "license": "MIT",
+  "author": "hadan8977",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hadan8977/ime-guard.git"
+  },
+  "keywords": [
+    "ime",
+    "isComposing",
+    "composition",
+    "cjk",
+    "chinese",
+    "japanese",
+    "korean",
+    "enter",
+    "keydown",
+    "safari",
+    "chat"
+  ],
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./react": {
+      "types": "./dist/react.d.ts",
+      "default": "./dist/react.js"
+    },
+    "./testing": {
+      "types": "./dist/testing.d.ts",
+      "default": "./dist/testing.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "peerDependencies": {
+    "react": ">=17"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "@testing-library/react": "^16.3.3",
+    "@types/react": "^19.3.0",
+    "eslint": "^9.39.5",
+    "eslint-plugin-ime-safe-form": "^1.5.0",
+    "jsdom": "^30.1.3",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.72.1",
+    "vitest": "^5.1.0"
+  }
+}
