@@ -15,7 +15,8 @@
 按 Escape 关候选框也一样，会把整个弹窗关掉。大多数开发者不用输入法，所以几乎每个 AI 聊天应用都有这个毛病。
 OpenMausBot 里的真实修复：[#3788](https://github.com/milind-soni/OpenMausBot/pull/3788)（新建频道）、
 [#4126](https://github.com/milind-soni/OpenMausBot/pull/4126)（新建自动化）、
-[#4230](https://github.com/milind-soni/OpenMausBot/pull/4230)（命令面板）。
+[#4230](https://github.com/milind-soni/OpenMausBot/pull/4230)（命令面板）、
+[#4357](https://github.com/milind-soni/OpenMausBot/pull/4357)（查找栏）。
 
 ## 安装
 
@@ -23,7 +24,7 @@ OpenMausBot 里的真实修复：[#3788](https://github.com/milind-soni/OpenMaus
 npm i github:hadan8977/ime-guard   # 还没发 npm
 ```
 
-零依赖，约 40 行，不挑框架。
+零依赖，核心很小，不挑框架。
 
 ## 用法
 

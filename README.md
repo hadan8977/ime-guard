@@ -16,7 +16,8 @@ Pressing Escape to close the candidate list has the same problem: it closes your
 Most devs never type with an IME, so this bug ships in almost every AI chat app.
 Real fixes in OpenMausBot: [#3788](https://github.com/milind-soni/OpenMausBot/pull/3788) (new channel dialog),
 [#4126](https://github.com/milind-soni/OpenMausBot/pull/4126) (new automation input),
-[#4230](https://github.com/milind-soni/OpenMausBot/pull/4230) (command palette).
+[#4230](https://github.com/milind-soni/OpenMausBot/pull/4230) (command palette),
+[#4357](https://github.com/milind-soni/OpenMausBot/pull/4357) (find bar).
 
 ## Install
 
@@ -24,7 +25,7 @@ Real fixes in OpenMausBot: [#3788](https://github.com/milind-soni/OpenMausBot/pu
 npm i ime-guard   # not published yet — for now: npm i github:hadan8977/ime-guard
 ```
 
-Zero dependencies. ~40 lines. Works with any framework.
+Zero dependencies. Tiny core. Works with any framework.
 
 ## Use
 
