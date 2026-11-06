@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ime-guard demo</title>
+  <style>
+    :root { font-family: system-ui, sans-serif; color: #111; }
+    body { max-width: 720px; margin: 2rem auto; padding: 0 1rem; }
+    h1 { font-size: 1.25rem; margin: 0 0 0.5rem; }
+    p { color: #444; line-height: 1.45; }
+    .row { display: grid; gap: 1rem; grid-template-columns: 1fr 1fr; }
+    @media (max-width: 640px) { .row { grid-template-columns: 1fr; } }
+    .card { border: 1px solid #ddd; border-radius: 10px; padding: 0.9rem; }
+    .card h2 { font-size: 0.95rem; margin: 0 0 0.6rem; }
+    .bad { background: #fff6f6; }
+    .good { background: #f4fff6; }
+    input { width: 100%; box-sizing: border-box; font-size: 1rem; padding: 0.55rem 0.65rem; border: 1px solid #ccc; border-radius: 8px; }
+    ul { list-style: none; padding: 0; margin: 0.75rem 0 0; min-height: 4.5rem; }
+    li { padding: 0.35rem 0.5rem; border-radius: 6px; background: #f3f3f3; margin-top: 0.35rem; word-break: break-word; }
+    li.err { background: #ffe3e3; }
+    code { font-size: 0.85em; }
+    .hint { font-size: 0.85rem; color: #666; margin-top: 1rem; }
+  </style>
+</head>
+<body>
+  <h1>ime-guard demo</h1>
+  <p>Type with a CJK IME (Pinyin / Kana / Hangul). Press Enter to pick a candidate. Left side sends the half-typed text; right side only confirms the word.</p>
+  <div class="row">
+    <section class="card bad">
+      <h2>Without ime-guard</h2>
+      <input id="raw" autocomplete="off" placeholder="Type jiudian, then Enter" />
+      <ul id="raw-log"></ul>
+    </section>
+    <section class="card good">
+      <h2>With ime-guard</h2>
+      <input id="safe" autocomplete="off" placeholder="Type jiudian, then Enter" />
+      <ul id="safe-log"></ul>
+    </section>
+  </div>
+  <p class="hint">Open this file via a local static server so the ES module loads (e.g. <code>npx serve examples</code> from the repo root after <code>npm run build</code>). Safari is the interesting browser: it fires <code>compositionend</code> before the confirming keydown.</p>
+  <script type="module">
+    import { imeSafe, createImeTracker } from "../dist/index.js";
+
+    function wire(input, log, guard) {
+      const send = () => {
+        const text = input.value.trim();
+        if (!text) return;
+        const li = document.createElement("li");
+        li.textContent = text;
+        if (!guard) li.className = "err";
+        log.prepend(li);
+        input.value = "";
+      };
+      const onKeyDown = (e) => {
+        if (e.key === "Enter") {
+          e.preventDefault();
+          send();
+        }
+      };
+      if (guard) {
+        const tracker = createImeTracker(input);
+        input.addEventListener("keydown", imeSafe(onKeyDown, tracker));
+      } else {
+        input.addEventListener("keydown", onKeyDown);
+      }
+    }
+
+    wire(document.getElementById("raw"), document.getElementById("raw-log"), false);
+    wire(document.getElementById("safe"), document.getElementById("safe-log"), true);
+  </script>
+</body>
+</html>
